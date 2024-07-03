@@ -30,4 +30,16 @@ buttons = [[0,0,0],
 label = Label(text=player + " Turn", font=('Arial', 30))
 label.pack(side="top")
 
+rest_button = Button(text="restart", font=('Arial', 20), command=new_game)
+rest_button.pack(side="top")
+
+frame = Frame(window)
+frame.pack()
+
+for row in range (3):
+    for column in range(3):
+        buttons[row][column] = Button(frame, text="", font=('Arial', 20), width=3, height=3,
+                                       command=lambda row=row, column=column: next_turn(row, column))
+        buttons[row][column].grid(row=row, column=column)
+
 window.mainloop()
