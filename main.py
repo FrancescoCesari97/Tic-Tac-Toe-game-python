@@ -10,7 +10,7 @@ def next_turn(row, column):
 
     if buttons[row][column]['text'] == "" and check_winner() is False:
 
-        if player == player[0]:
+        if player == players[0]:
 
             buttons[row][column]['text'] = player
 
@@ -74,7 +74,15 @@ def empty_spaces():
         return True
 
 def new_game():
-    pass
+    global player
+    player = random.choice(players)
+
+    label.config(text=player + " turn")
+
+    for row in range(3):
+        for column in range(3):
+
+            buttons[row][column].config(text="",bg="#F0F0F0")
 
 
 window = Tk()
