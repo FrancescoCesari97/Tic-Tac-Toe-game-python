@@ -5,6 +5,7 @@ import random
 
 
 def next_turn(row, column):
+
     global player
 
     if buttons[row][column]['text'] == "" and check_winner() is False:
@@ -47,9 +48,12 @@ def check_winner():
         if buttons[0][column]['text'] == buttons[1][column]['text'] == buttons[2][column]['text'] != "":
             return True
         
-    if buttons[0][0]['text'] == buttons[1][1]['text'] == buttons[2][2]['text'] or buttons[0][2]['text'] == buttons[1][1]['text'] == buttons[2][0]['text'] != "":
+    if buttons[0][0]['text'] == buttons[1][1]['text'] == buttons[2][2]['text'] != "":
         return True
     
+    elif buttons[0][2]['text'] == buttons[1][1]['text'] == buttons[2][0]['text'] != "":
+        return True
+
     elif empty_spaces() is False:
         return "Tie"
     
@@ -57,7 +61,17 @@ def check_winner():
         return False
         
 def empty_spaces():
-    pass
+    
+    spaces = 9
+
+    for row in range(3):
+        for column in range(3):
+            if buttons[row][column]['text'] != "":
+                spaces -= 1
+    if spaces == 0:
+        return False
+    else: 
+        return True
 
 def new_game():
     pass
@@ -76,8 +90,8 @@ buttons = [[0,0,0],
 label = Label(text=player + " Turn", font=('Arial', 30))
 label.pack(side="top")
 
-rest_button = Button(text="restart", font=('Arial', 20), command=new_game)
-rest_button.pack(side="top")
+reset_button = Button(text="Restart", font=('Arial', 20), command=new_game)
+reset_button.pack(side="top")
 
 frame = Frame(window)
 frame.pack()
